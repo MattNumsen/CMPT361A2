@@ -1,0 +1,58 @@
+CMPT 361 Assignment 2 Submission
+
+Student Number: 	301143052
+Name: 				Matthaeus Zachary Numsen
+
+To Run:
+
+put Assignment2.tar.gz in a clean testing directory, and paste the following into terminal
+
+
+tar -xzvf Assignment2.tar.gz
+make
+./FruitTetris
+
+PART A: The gri is made 3d by deining many more board points and grid points, mirrored, varrying them by setting the z coordinates to be 16.5 and -16.5, which creates depth in the z direction. 
+
+Cubes are modelled as follows:
+
+/*
+	  6---8		Front, Right, Back, Left
+	 /|  /|		2---4		4---8		8---6		6---2
+	2---4 |		| F |	,	| R |	,	| B |	,	| L |
+	| 5-|-7 	1---3		3---7		7---5		5---1
+	|/  |/ 
+	1---3
+				Top, Bottom
+				6---8		1---3		
+				| T |	,	| B |	
+				2---3		5---7
+
+				2 triangles for Front Face
+				  
+				2---4 		2
+				 \	|		| \
+				  \ |		|  \
+				    3   	1---3
+		Based on code provided initially
+*/			
+
+PART B: I formed a pespective projection using the provided functions, and formed a view matrix using the lookat function. Together with these, I efectively made a working "viewpoint". In order to rotate the view, I simply multiplied the View matrix by the provided RotateY function. This then gets redrawn by the shader to show a new viewpoint. 
+
+PART C: I imported the robot arm provided in the example1.cpp in seperate .cpp and .h files for clarity. After that, it was simple to mimick the model matrix construction shown in the example. I used the given Theta structure to store the angles of the various pieces. Each redisplay, the scene is reconstructed based on this remembered theta values.
+
+Part D:I created a function within the robot arm implementation which calculated the position of the tip of the robot arm via the given values. It then returns this as a 2d vector [(x, y) as the depth is unimportant)
+
+Shuffling was NOT part of our original assignment, so I didn't do anything related to that. I created a function which will immediately snap the piece to the bottom when released. This isn't the greatest mechanic visually, but since the LEFT AND RIGHT KEYS ARE SPECIFICALLY DISABLED (as mentioned in the assignment) I argue that it is not needed to watch the tile drop. 
+
+PART E: I simply made a function which tested if a given piece of a tile was outside of the bounds of the square, or within another square. This boolean function is used to check each time the robot arm is moved, and when the space bar is pressed, before trying to snap.
+
+PART F: I finished PART E at 11:30 PM on the night this assignment was due. I did not get a chance to implemet this. 
+
+FURTHER IMPLEMENTATION
+
+If i had more time (and finished the timer) I would have liked to have ctrl + up/down zoom the Camera in and out. It would be a simple bit of code, but I only have 10 minutes until it is due. 
+
+
+
+Have fun playing tetris^3 like, 70 different times to mark all of these! Don't hurt your fingers :)
